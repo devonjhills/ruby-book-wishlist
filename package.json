@@ -1,0 +1,30 @@
+{
+  "name": "book-collection-manager",
+  "version": "1.0.0",
+  "description": "Full-stack book collection manager with Rails backend and React frontend",
+  "scripts": {
+    "start": "./start.sh",
+    "start:windows": "start.bat",
+    "dev": "./start.sh",
+    "setup": "cd wishlist_backend && bundle install && rails db:create db:migrate db:seed && cd ../wishlist_frontend && npm install",
+    "backend": "cd wishlist_backend && rails server -p 3001",
+    "frontend": "cd wishlist_frontend && npm run dev",
+    "test": "cd wishlist_backend && rails test",
+    "lint": "cd wishlist_frontend && npm run lint"
+  },
+  "keywords": [
+    "rails",
+    "react",
+    "books",
+    "collection",
+    "postgresql",
+    "jwt",
+    "full-stack"
+  ],
+  "author": "Book Collection Manager",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "ruby": ">=3.4.0"
+  }
+}

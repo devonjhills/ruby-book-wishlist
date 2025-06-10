@@ -1,0 +1,98 @@
+=> Booting Puma
+=> Rails 8.0.2 application starting in development 
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 6.6.0 ("Return to Forever")
+* Ruby version: ruby 3.4.4 (2025-05-14 revision a38531fd3f) +PRISM [x86_64-darwin24]
+*  Min threads: 3
+*  Max threads: 3
+*  Environment: development
+*          PID: 39207
+* Listening on http://127.0.0.1:3001
+* Listening on http://[::1]:3001
+Use Ctrl-C to stop
+Started GET "/api/auth/me" for ::1 at 2025-06-10 16:36:46 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='WishlistBackend'*/[0m
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 61ms (Views: 1.2ms | ActiveRecord: 25.1ms (1 query, 0 cached) | GC: 2.5ms)
+
+
+Started GET "/api/auth/me" for ::1 at 2025-06-10 16:36:46 -0400
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=created_at" for ::1 at 2025-06-10 16:36:46 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "created_at"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (1.8ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."created_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 31ms (Views: 12.0ms | ActiveRecord: 5.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=created_at" for ::1 at 2025-06-10 16:36:46 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "created_at"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."created_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=updated_at" for ::1 at 2025-06-10 16:37:03 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."updated_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=updated_at" for ::1 at 2025-06-10 16:37:03 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."updated_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/search/books?q=enders+war" for ::1 at 2025-06-10 16:37:20 -0400
+Processing by Api::SearchController#books as HTML
+  Parameters: {"q" => "enders war"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='books',application='WishlistBackend',controller='search'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 1998ms (Views: 0.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=created_at" for ::1 at 2025-06-10 16:37:53 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "created_at"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (1.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."created_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 1.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=created_at" for ::1 at 2025-06-10 16:37:53 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "created_at"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+  [1m[36mItem Load (0.7ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 2 ORDER BY "items"."created_at" DESC /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:22:in 'Api::ItemsController#index'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+- Gracefully stopping, waiting for requests to finish
+Exiting
