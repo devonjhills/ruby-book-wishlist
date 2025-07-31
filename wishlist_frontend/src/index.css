@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,36 +6,38 @@
 
 @layer base {
   :root {
-    /* Cozy Gothic Library theme - dark mode with warm accents */
+    /* Ruby Library theme - dark mode with ruby red accents */
     --background: 20 14% 4%; /* Deep charcoal black */
     --foreground: 33 5% 95%; /* Warm off-white */
     --card: 20 14% 6%; /* Dark brown-black */
     --card-foreground: 33 5% 95%; /* Warm off-white */
     --popover: 20 14% 6%; /* Dark brown-black */
     --popover-foreground: 33 5% 95%; /* Warm off-white */
-    --primary: 27 96% 61%; /* Warm golden amber */
-    --primary-foreground: 20 14% 4%; /* Deep charcoal for contrast */
+    --primary: 355 75% 55%; /* Deep ruby red */
+    --primary-foreground: 33 5% 95%; /* Warm off-white for contrast */
     --secondary: 20 14% 12%; /* Dark brown-gray */
     --secondary-foreground: 33 5% 85%; /* Light warm gray */
     --muted: 20 14% 20%; /* Lighter muted for better hover visibility */
     --muted-foreground: 35 8% 75%; /* Lighter gray for better readability */
-    --accent: 25 85% 58%; /* Rich copper-orange */
-    --accent-foreground: 20 14% 4%; /* Deep charcoal */
-    --destructive: 0 75% 60%; /* Deep burgundy red */
+    --accent: 340 60% 45%; /* Rich burgundy */
+    --accent-foreground: 33 5% 95%; /* Warm off-white */
+    --destructive: 0 75% 60%; /* Deep red */
     --destructive-foreground: 33 5% 95%; /* Warm off-white */
     --border: 20 14% 25%; /* Lighter border for better visibility */
     --input: 20 14% 8%; /* Dark input background */
-    --ring: 27 96% 61%; /* Golden focus ring */
+    --ring: 355 75% 55%; /* Ruby focus ring */
 
-    /* Gothic library specific theme colors */
+    /* Ruby library specific theme colors */
     --leather: 25 30% 20%; /* Rich leather brown */
     --parchment: 33 20% 88%; /* Aged parchment */
     --wood: 30 40% 25%; /* Dark wood */
-    --brass: 45 100% 50%; /* Brass accents */
+    --ruby: 355 85% 60%; /* Bright ruby red */
+    --ruby-dark: 355 60% 35%; /* Dark ruby */
     --velvet: 340 30% 15%; /* Deep velvet */
     --candlelight: 40 100% 85%; /* Warm candlelight */
     --shadow-deep: 20 20% 2%; /* Deep shadow */
     --moss: 120 30% 25%; /* Aged moss green */
+    --garnet: 350 50% 30%; /* Deep garnet red */
   }
 
   html {
@@ -98,7 +100,7 @@
       hsla(var(--candlelight), 0.02) 50%,
       transparent 50%
     );
-    border: 1px solid hsla(var(--brass), 0.2);
+    border: 1px solid hsla(var(--ruby), 0.2);
   }
 
   .candlelight-glow {
@@ -146,7 +148,7 @@
     content: "";
     position: absolute;
     inset: -1px;
-    border: 1px solid hsla(var(--brass), 0.3);
+    border: 1px solid hsla(var(--ruby), 0.3);
     border-radius: 0.5rem;
     pointer-events: none;
   }
@@ -171,9 +173,14 @@
       0 0 20px hsla(var(--primary), 0.3);
   }
 
-  .brass-accent {
-    color: hsl(var(--brass));
-    text-shadow: 0 0 8px hsla(var(--brass), 0.4);
+  .ruby-accent {
+    color: hsl(var(--ruby));
+    text-shadow: 0 0 8px hsla(var(--ruby), 0.4);
+  }
+
+  .garnet-accent {
+    color: hsl(var(--garnet));
+    text-shadow: 0 0 8px hsla(var(--garnet), 0.4);
   }
 
   /* Enhanced dropdown hover styles */
@@ -205,20 +212,82 @@
 }
 
 @layer components {
+  /* Typography Scale */
+  .typography-display {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+  }
+
+  .typography-h1 {
+    @apply font-serif text-3xl md:text-4xl font-bold leading-tight tracking-tight;
+  }
+
+  .typography-h2 {
+    @apply font-serif text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
+  }
+
+  .typography-h3 {
+    @apply font-serif text-xl md:text-2xl font-semibold leading-snug;
+  }
+
+  .typography-h4 {
+    @apply font-serif text-lg md:text-xl font-semibold leading-snug;
+  }
+
+  .typography-body-large {
+    @apply font-sans text-lg leading-relaxed;
+  }
+
+  .typography-body {
+    @apply font-sans text-base leading-relaxed;
+  }
+
+  .typography-body-small {
+    @apply font-sans text-sm leading-relaxed;
+  }
+
+  .typography-caption {
+    @apply font-sans text-xs leading-normal tracking-wide uppercase;
+  }
+
+  .typography-code {
+    @apply font-mono text-sm;
+  }
+
+  /* Ruby Library Typography Effects */
+  .ruby-title {
+    @apply typography-h1 ruby-accent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .library-heading {
+    @apply font-serif font-bold text-foreground;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .elegant-text {
+    @apply font-serif text-foreground/90 leading-relaxed;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  .tech-text {
+    @apply font-sans font-medium text-muted-foreground;
+    letter-spacing: 0.025em;
+  }
+
   .btn-primary {
-    @apply px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg candlelight-glow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-sans font-medium rounded-lg candlelight-glow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium rounded-lg border border-border hover:border-primary/30 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
+    @apply px-6 py-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground font-sans font-medium rounded-lg border border-border hover:border-primary/30 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
 
   .btn-success {
-    @apply px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
+    @apply px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-sans font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
 
   .btn-danger {
-    @apply px-6 py-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
+    @apply px-6 py-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground font-sans font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
 
   .card {
@@ -239,5 +308,6 @@
 
   .loading-spinner {
     @apply animate-spin w-6 h-6 border-2 border-muted border-t-primary rounded-full;
+    box-shadow: 0 0 10px hsla(var(--primary), 0.3);
   }
 }

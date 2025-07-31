@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./ui/button";
-import { BookOpen, Library, Plus, LogOut, User } from "lucide-react";
+import { BookOpen, Library, Plus, LogOut, User, Gem } from "lucide-react";
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -19,15 +19,15 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 group">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform shadow-md">
-                  <Library className="w-7 h-7 text-primary-foreground" />
+                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform shadow-md candlelight-glow">
+                  <Gem className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-foreground tracking-tight">
-                    Wishlist
+                  <h1 className="ruby-title text-2xl md:text-3xl">
+                    Ruby Library
                   </h1>
-                  <p className="text-xs text-muted-foreground italic">
-                    Personal Library
+                  <p className="typography-caption text-muted-foreground italic font-normal">
+                    Code & Knowledge Collection
                   </p>
                 </div>
               </div>

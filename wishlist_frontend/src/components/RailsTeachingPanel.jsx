@@ -157,7 +157,7 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
             </div>
             <div>
               <CardTitle className="flex items-center gap-2">
-                <span className="text-xl font-bold">
+                <span className="typography-h2 font-bold">
                   Rails Framework Deep Dive
                 </span>
                 <Badge
@@ -167,7 +167,7 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                   Educational Mode
                 </Badge>
               </CardTitle>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="typography-body text-muted-foreground mt-1">
                 Interactive exploration of Ruby on Rails architecture, database
                 optimization, and web development patterns
               </p>
@@ -210,18 +210,18 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
           {/* Rails Process Tab */}
           <TabsContent value="process" className="space-y-4">
             <div className="bg-slate-50 dark:bg-slate-900/50 rounded-lg p-4 mb-4">
-              <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+              <h3 className="typography-h3 mb-2 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-primary" />
                 Rails Request Processing Pipeline
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="typography-body text-muted-foreground">
                 Follow the journey of an HTTP request through the Rails
                 framework, from URL routing to JSON response.
               </p>
             </div>
 
             <div className="space-y-3">
-              {railsProcessSteps.map((step, index) => {
+              {railsProcessSteps.map((step) => {
                 const Icon = step.icon;
                 const isExpanded = expandedSections.has(step.id);
 
@@ -553,26 +553,80 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 <CardContent className="space-y-3">
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Rails Guides</h5>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground mb-2">
                       Official Rails documentation covers Active Record,
                       routing, and performance optimization.
                     </p>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href="https://guides.rubyonrails.org/active_record_querying.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded transition-colors"
+                      >
+                        Active Record Guide
+                      </a>
+                      <a
+                        href="https://guides.rubyonrails.org/routing.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded transition-colors"
+                      >
+                        Routing Guide
+                      </a>
+                    </div>
                   </div>
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Database Design</h5>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground mb-2">
                       Understanding indexes, constraints, and query optimization
                       for PostgreSQL.
                     </p>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href="https://www.postgresql.org/docs/current/indexes.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-green-100 hover:bg-green-200 text-green-700 px-2 py-1 rounded transition-colors"
+                      >
+                        PostgreSQL Indexes
+                      </a>
+                      <a
+                        href="https://guides.rubyonrails.org/association_basics.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-green-100 hover:bg-green-200 text-green-700 px-2 py-1 rounded transition-colors"
+                      >
+                        Associations Guide
+                      </a>
+                    </div>
                   </div>
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">
                       Security Best Practices
                     </h5>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground mb-2">
                       JWT authentication, parameter filtering, and CORS
                       configuration for API security.
                     </p>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href="https://guides.rubyonrails.org/security.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-red-100 hover:bg-red-200 text-red-700 px-2 py-1 rounded transition-colors"
+                      >
+                        Rails Security Guide
+                      </a>
+                      <a
+                        href="https://jwt.io/introduction"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs bg-red-100 hover:bg-red-200 text-red-700 px-2 py-1 rounded transition-colors"
+                      >
+                        JWT Documentation
+                      </a>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
