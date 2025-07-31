@@ -28,9 +28,13 @@ const Items = () => {
       if (filters.sort) params.sort = filters.sort;
 
       const response = await itemsAPI.getItems(params);
-      setItems(response.data);
+      
+      // Handle both old and new API response formats
+      const itemsData = response.data?.items || response.data || [];
+      setItems(Array.isArray(itemsData) ? itemsData : []);
     } catch (error) {
       console.error('Failed to fetch items:', error);
+      setItems([]); // Set empty array on error
     } finally {
       setLoading(false);
     }

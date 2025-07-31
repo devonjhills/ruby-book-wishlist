@@ -1,0 +1,34 @@
+# Application-wide log files
+*.log
+backend.log
+frontend.log
+CLAUDE.md
+
+# Development logs
+development.log
+production.log
+test.log
+vite.log
+build.log
+dev.log
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

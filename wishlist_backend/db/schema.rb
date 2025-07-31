@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_09_125000) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_31_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,8 +29,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_09_125000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.index "to_tsvector('english'::regconfig, (((COALESCE(title, ''::character varying))::text || ' '::text) || (COALESCE(author_or_director, ''::character varying))::text))", name: "index_items_on_fulltext_search", using: :gin
+    t.index ["external_id"], name: "index_items_on_external_id"
     t.index ["item_type"], name: "index_items_on_item_type"
     t.index ["status"], name: "index_items_on_status"
+    t.index ["user_id", "created_at"], name: "index_items_on_user_id_and_created_at"
+    t.index ["user_id", "rating"], name: "index_items_on_user_id_and_rating", where: "(rating IS NOT NULL)"
+    t.index ["user_id", "status"], name: "index_items_on_user_id_and_status"
+    t.index ["user_id", "updated_at"], name: "index_items_on_user_id_and_updated_at"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 

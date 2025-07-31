@@ -7,6 +7,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Additional frontend logs
+frontend.log
+vite.log
+build.log
+dev.log
+
 node_modules
 dist
 dist-ssr

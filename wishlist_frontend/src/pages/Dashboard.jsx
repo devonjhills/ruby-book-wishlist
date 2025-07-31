@@ -4,14 +4,23 @@ import { itemsAPI } from '../services/api';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
+import { useBackendActivity } from '../components/BackendMonitor';
+import RailsTeachingPanel from '../components/RailsTeachingPanel';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
     total: 0,
     completed: 0,
+    want_to_read: 0,
+    currently_reading: 0,
+    avg_rating: 0,
+    total_rated: 0
   });
   const [recentItems, setRecentItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [debugInfo, setDebugInfo] = useState(null);
+  const [showEducationalPanels, setShowEducationalPanels] = useState(false);
+  const { addActivity } = useBackendActivity();
 
   useEffect(() => {
     fetchDashboardData();
@@ -19,23 +28,56 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await itemsAPI.getItems({ sort: 'created_at' });
-      const items = Array.isArray(response.data) ? response.data : [];
+      // Trigger backend activity for educational purposes
+      const activityId = addActivity('load_dashboard', 'Loading dashboard data with optimized queries');
+      
+      // Show educational panels
+      setShowEducationalPanels(true);
+      
+      // Use enhanced API with debug info
+      const response = await itemsAPI.getItems({ 
+        sort: 'updated_at', 
+        per_page: 10, 
+        include_count: 'true',
+        debug: 'true' // Request debug information
+      });
+      
+      const responseData = response.data || {};
+      const items = Array.isArray(responseData.items) ? responseData.items : 
+                   Array.isArray(responseData) ? responseData : [];
+      const serverStats = responseData.stats || {};
+      const debugData = responseData.debug_info || null;
+      
+      // Store debug information for educational display
+      setDebugInfo(debugData);
       
       // Filter out any invalid items
       const validItems = items.filter(item => item && item.id && item.title);
       
+      // Use server-provided stats if available, otherwise calculate
       setStats({
-        total: validItems.length,
-        completed: validItems.filter(item => item.status === 'completed').length,
+        total: serverStats.total || validItems.length,
+        completed: serverStats.completed || validItems.filter(item => item.status === 'completed').length,
+        want_to_read: serverStats.want_to_read || validItems.filter(item => item.status === 'want_to_read').length,
+        currently_reading: serverStats.currently_reading || validItems.filter(item => item.status === 'currently_reading').length,
+        avg_rating: serverStats.avg_rating || 0,
+        total_rated: serverStats.total_rated || validItems.filter(item => item.rating).length
       });
       
       setRecentItems(validItems.slice(0, 5));
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
       // Set default values on error
-      setStats({ total: 0, completed: 0 });
+      setStats({ 
+        total: 0, 
+        completed: 0, 
+        want_to_read: 0, 
+        currently_reading: 0,
+        avg_rating: 0,
+        total_rated: 0 
+      });
       setRecentItems([]);
+      setDebugInfo(null);
     } finally {
       setLoading(false);
     }
@@ -60,44 +102,152 @@ const Dashboard = () => {
         </p>
       </div>
         
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <Card>
+      {/* Educational Toggle */}
+      <div className="mb-6 flex justify-between items-center">
+        <div>
+          <h2 className="text-2xl font-semibold">Library Statistics</h2>
+          <p className="text-muted-foreground">Real-time data from your Rails backend</p>
+        </div>
+        <Button
+          variant="outline"
+          onClick={() => setShowEducationalPanels(!showEducationalPanels)}
+          className="border-primary/30 text-primary hover:bg-primary/10"
+        >
+          {showEducationalPanels ? '📚 Hide Rails Deep Dive' : '📚 Rails Deep Dive'}
+        </Button>
+      </div>
+
+      {/* Enhanced Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                <h3 className="text-sm font-medium text-blue-600 mb-1">
                   Total Books
                 </h3>
-                <p className="text-3xl font-bold">
+                <p className="text-3xl font-bold text-blue-700">
                   {stats.total}
                 </p>
               </div>
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-primary-foreground text-xl">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl">
                 📚
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                <h3 className="text-sm font-medium text-yellow-600 mb-1">
+                  Want to Read
+                </h3>
+                <p className="text-3xl font-bold text-yellow-700">
+                  {stats.want_to_read}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center text-white text-xl">
+                🔖
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-medium text-orange-600 mb-1">
+                  Currently Reading
+                </h3>
+                <p className="text-3xl font-bold text-orange-700">
+                  {stats.currently_reading}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center text-white text-xl">
+                📖
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-medium text-green-600 mb-1">
                   Completed
                 </h3>
-                <p className="text-3xl font-bold text-green-500">
+                <p className="text-3xl font-bold text-green-700">
                   {stats.completed}
                 </p>
               </div>
               <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white text-xl">
-                ✓
+                ✅
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
+
+      {/* Reading Progress & Rating Stats */}
+      {(stats.avg_rating > 0 || stats.total_rated > 0) && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {stats.avg_rating > 0 && (
+            <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-purple-600 mb-1">
+                      Average Rating
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <p className="text-3xl font-bold text-purple-700">
+                        {stats.avg_rating}
+                      </p>
+                      <div className="flex">
+                        {[1,2,3,4,5].map(star => (
+                          <span key={star} className={`text-lg ${star <= Math.floor(stats.avg_rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white text-xl">
+                    ⭐
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+          
+          {stats.total_rated > 0 && (
+            <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-indigo-600 mb-1">
+                      Books Rated
+                    </h3>
+                    <p className="text-3xl font-bold text-indigo-700">
+                      {stats.total_rated}
+                    </p>
+                    <p className="text-xs text-indigo-500 mt-1">
+                      {stats.total > 0 ? Math.round((stats.total_rated / stats.total) * 100) : 0}% of collection
+                    </p>
+                  </div>
+                  <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xl">
+                    📊
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
 
       {/* Recent Items */}
       <Card>
@@ -173,6 +323,13 @@ const Dashboard = () => {
           )}
         </CardContent>
       </Card>
+
+      {/* Unified Rails Teaching Panel */}
+      <RailsTeachingPanel 
+        debugInfo={debugInfo}
+        isVisible={showEducationalPanels} 
+        onToggle={() => setShowEducationalPanels(false)}
+      />
     </div>
   );
 };

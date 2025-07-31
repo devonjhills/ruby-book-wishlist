@@ -62,7 +62,27 @@ const ProcessDebugPanel = ({ isVisible, operation, onClose }) => {
             step: 'SQL Generation', 
             code: 'INSERT INTO items (title, author_or_director, item_type, status, user_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)', 
             description: 'Active Record generates optimized SQL INSERT statement',
-            details: 'Active Record converts the Ruby object into a SQL INSERT statement, handling data type conversion, escaping values to prevent SQL injection, and automatically setting timestamp fields (created_at, updated_at).'
+            details: 'Active Record converts the Ruby object into a SQL INSERT statement, handling data type conversion, escaping values to prevent SQL injection, and automatically setting timestamp fields (created_at, updated_at). Rails uses prepared statements for security and performance.',
+            advanced: {
+              concepts: ['Prepared Statements', 'SQL Injection Prevention', 'Data Type Conversion', 'Timestamp Automation'],
+              codeExample: `# Ruby code:
+@item = current_user.items.build(title: "The Great Gatsby", status: "want_to_read")
+@item.save
+
+# Generated SQL (with parameter binding):
+INSERT INTO "items" 
+  ("title", "author_or_director", "item_type", "status", "user_id", "created_at", "updated_at") 
+VALUES 
+  ($1, $2, $3, $4, $5, $6, $7)
+  
+# Parameters: ["The Great Gatsby", nil, "book", "want_to_read", 1, "2025-07-31 12:00:00", "2025-07-31 12:00:00"]`,
+              tips: [
+                'Rails automatically prevents SQL injection by using parameterized queries',
+                'created_at and updated_at timestamps are managed automatically',
+                'Active Record handles proper data type conversion (String to VARCHAR, Integer to BIGINT, etc.)',
+                'Database constraints and validations work together for data integrity'
+              ]
+            }
           },
           { 
             step: 'Database Execution', 
@@ -419,9 +439,55 @@ const ProcessDebugPanel = ({ isVisible, operation, onClose }) => {
                     {/* Collapsible detailed explanation */}
                     {expandedSteps.has(index) && step.details && (
                       <div className="border-t border-border p-3 bg-accent/5">
-                        <div className="ml-7">
-                          <h5 className="text-xs font-semibold text-accent mb-2">💎 Rails Framework Deep Dive:</h5>
-                          <p className="text-xs text-muted-foreground leading-relaxed">{step.details}</p>
+                        <div className="ml-7 space-y-4">
+                          <div>
+                            <h5 className="text-xs font-semibold text-accent mb-2">💎 Rails Framework Deep Dive:</h5>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{step.details}</p>
+                          </div>
+                          
+                          {/* Advanced teaching features */}
+                          {step.advanced && (
+                            <div className="space-y-3">
+                              {/* Key Concepts */}
+                              {step.advanced.concepts && (
+                                <div>
+                                  <h6 className="text-xs font-semibold text-primary mb-2">🎯 Key Concepts:</h6>
+                                  <div className="flex flex-wrap gap-1">
+                                    {step.advanced.concepts.map((concept, i) => (
+                                      <span key={i} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full border border-primary/20">
+                                        {concept}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {/* Code Example */}
+                              {step.advanced.codeExample && (
+                                <div>
+                                  <h6 className="text-xs font-semibold text-green-600 mb-2">📝 Code Example:</h6>
+                                  <pre className="text-xs bg-slate-900 text-green-400 p-3 rounded overflow-x-auto font-mono border border-green-500/20">
+                                    {step.advanced.codeExample}
+                                  </pre>
+                                </div>
+                              )}
+                              
+                              {/* Learning Tips */}
+                              {step.advanced.tips && (
+                                <div>
+                                  <h6 className="text-xs font-semibold text-blue-600 mb-2">💡 Pro Tips:</h6>
+                                  <ul className="space-y-1">
+                                    {step.advanced.tips.map((tip, i) => (
+                                      <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
+                                        <span className="text-blue-500 text-xs">•</span>
+                                        <span className="leading-relaxed">{tip}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}

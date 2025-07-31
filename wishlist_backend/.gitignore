@@ -11,6 +11,13 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore additional log files
+*.log
+backend.log
+development.log
+production.log
+test.log
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/.keep

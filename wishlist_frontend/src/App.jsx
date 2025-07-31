@@ -4,7 +4,6 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { BackendActivityProvider, useBackendActivity } from './components/BackendMonitor';
 import { setRailsActivityTracker } from './services/api';
 import Navbar from './components/Navbar';
-import BackendMonitor from './components/BackendMonitor';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -93,7 +92,6 @@ const AppContent = () => {
           } 
         />
       </Routes>
-      <BackendMonitor />
     </>
   );
 };
