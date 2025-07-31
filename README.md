@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Ruby Library Logo](wishlist_frontend/public/ruby-icon.svg)
-
 **A sophisticated full-stack book collection management system built with Ruby on Rails and React**
 
 [![Ruby](https://img.shields.io/badge/Ruby-3.4+-CC342D?style=for-the-badge&logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
@@ -13,10 +11,8 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4+-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg?style=for-the-badge)](https://github.com/your-username/ruby-library)
+<img width="970" height="539" alt="Screenshot 2025-07-31 at 3 41 41 PM" src="https://github.com/user-attachments/assets/cf971816-bd33-4041-ae34-336e1688d511" />
 
-[🚀 Live Demo](#live-demo) • [📖 Documentation](#documentation) • [⚡ Quick Start](#quick-start) • [🏗️ Architecture](#architecture)
 
 </div>
 
@@ -278,31 +274,6 @@ npm run build           # Production build
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! This project is designed to showcase modern full-stack development practices.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-
-- Follow Ruby and Rails conventions
-- Use the existing code style and patterns
-- Add tests for new features
-- Update documentation as needed
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 🏆 Portfolio Highlights
 
 This project demonstrates:
@@ -316,13 +287,3 @@ This project demonstrates:
 - **API Integration**: External API consumption and error handling
 - **Testing**: Comprehensive test coverage
 - **Documentation**: Clear, professional documentation
-
----
-
-<div align="center">
-
-**Built with ❤️ and Ruby by [Your Name]**
-
-[⭐ Star this repo](https://github.com/your-username/ruby-library) • [🐛 Report Bug](https://github.com/your-username/ruby-library/issues) • [💡 Request Feature](https://github.com/your-username/ruby-library/issues)
-
-</div>
