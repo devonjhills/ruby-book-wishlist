@@ -266,7 +266,9 @@
 
   .elegant-text {
     @apply font-serif text-foreground/90 leading-relaxed;
-    font-feature-settings: "liga" 1, "kern" 1;
+    font-feature-settings:
+      "liga" 1,
+      "kern" 1;
   }
 
   .tech-text {

@@ -88,16 +88,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: [
-          "Crimson Text",
-          "Times New Roman",
-          "serif",
-        ],
-        sans: [
-          "IBM Plex Sans",
-          "system-ui",
-          "sans-serif",
-        ],
+        serif: ["Crimson Text", "Times New Roman", "serif"],
+        sans: ["IBM Plex Sans", "system-ui", "sans-serif"],
         mono: [
           "JetBrains Mono",
           "Fira Code",

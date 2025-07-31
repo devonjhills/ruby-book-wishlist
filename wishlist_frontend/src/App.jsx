@@ -25,7 +25,9 @@ const ProtectedRoute = ({ children }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="loading-spinner w-8 h-8"></div>
-        <span className="ml-3 text-muted-foreground animate-pulse">Loading Ruby Library...</span>
+        <span className="ml-3 text-muted-foreground animate-pulse">
+          Loading Ruby Library...
+        </span>
       </div>
     );
   }
@@ -40,7 +42,9 @@ const PublicRoute = ({ children }) => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="loading-spinner w-8 h-8"></div>
-        <span className="ml-3 text-muted-foreground animate-pulse">Loading Ruby Library...</span>
+        <span className="ml-3 text-muted-foreground animate-pulse">
+          Loading Ruby Library...
+        </span>
       </div>
     );
   }
