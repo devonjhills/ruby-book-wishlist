@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,159 +7,197 @@
 @layer base {
   :root {
     /* Cozy Gothic Library theme - dark mode with warm accents */
-    --background: 20 14% 4%;            /* Deep charcoal black */
-    --foreground: 33 5% 95%;            /* Warm off-white */
-    --card: 20 14% 6%;                  /* Dark brown-black */
-    --card-foreground: 33 5% 95%;       /* Warm off-white */
-    --popover: 20 14% 6%;               /* Dark brown-black */
-    --popover-foreground: 33 5% 95%;    /* Warm off-white */
-    --primary: 27 96% 61%;              /* Warm golden amber */
-    --primary-foreground: 20 14% 4%;    /* Deep charcoal for contrast */
-    --secondary: 20 14% 12%;            /* Dark brown-gray */
-    --secondary-foreground: 33 5% 85%;  /* Light warm gray */
-    --muted: 20 14% 20%;                /* Lighter muted for better hover visibility */
-    --muted-foreground: 35 8% 75%;      /* Lighter gray for better readability */
-    --accent: 25 85% 58%;               /* Rich copper-orange */
-    --accent-foreground: 20 14% 4%;     /* Deep charcoal */
-    --destructive: 0 75% 60%;           /* Deep burgundy red */
+    --background: 20 14% 4%; /* Deep charcoal black */
+    --foreground: 33 5% 95%; /* Warm off-white */
+    --card: 20 14% 6%; /* Dark brown-black */
+    --card-foreground: 33 5% 95%; /* Warm off-white */
+    --popover: 20 14% 6%; /* Dark brown-black */
+    --popover-foreground: 33 5% 95%; /* Warm off-white */
+    --primary: 27 96% 61%; /* Warm golden amber */
+    --primary-foreground: 20 14% 4%; /* Deep charcoal for contrast */
+    --secondary: 20 14% 12%; /* Dark brown-gray */
+    --secondary-foreground: 33 5% 85%; /* Light warm gray */
+    --muted: 20 14% 20%; /* Lighter muted for better hover visibility */
+    --muted-foreground: 35 8% 75%; /* Lighter gray for better readability */
+    --accent: 25 85% 58%; /* Rich copper-orange */
+    --accent-foreground: 20 14% 4%; /* Deep charcoal */
+    --destructive: 0 75% 60%; /* Deep burgundy red */
     --destructive-foreground: 33 5% 95%; /* Warm off-white */
-    --border: 20 14% 25%;               /* Lighter border for better visibility */
-    --input: 20 14% 8%;                 /* Dark input background */
-    --ring: 27 96% 61%;                 /* Golden focus ring */
-    
+    --border: 20 14% 25%; /* Lighter border for better visibility */
+    --input: 20 14% 8%; /* Dark input background */
+    --ring: 27 96% 61%; /* Golden focus ring */
+
     /* Gothic library specific theme colors */
-    --leather: 25 30% 20%;              /* Rich leather brown */
-    --parchment: 33 20% 88%;            /* Aged parchment */
-    --wood: 30 40% 25%;                 /* Dark wood */
-    --brass: 45 100% 50%;               /* Brass accents */
-    --velvet: 340 30% 15%;              /* Deep velvet */
-    --candlelight: 40 100% 85%;         /* Warm candlelight */
-    --shadow-deep: 20 20% 2%;           /* Deep shadow */
-    --moss: 120 30% 25%;                /* Aged moss green */
+    --leather: 25 30% 20%; /* Rich leather brown */
+    --parchment: 33 20% 88%; /* Aged parchment */
+    --wood: 30 40% 25%; /* Dark wood */
+    --brass: 45 100% 50%; /* Brass accents */
+    --velvet: 340 30% 15%; /* Deep velvet */
+    --candlelight: 40 100% 85%; /* Warm candlelight */
+    --shadow-deep: 20 20% 2%; /* Deep shadow */
+    --moss: 120 30% 25%; /* Aged moss green */
   }
 
   html {
     @apply bg-background text-foreground font-sans;
-    background-image: 
-      radial-gradient(ellipse at 20% 80%, hsla(var(--primary), 0.03) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, hsla(var(--accent), 0.02) 0%, transparent 50%),
-      linear-gradient(180deg, transparent 0%, hsla(var(--shadow-deep), 0.8) 100%);
+    background-image:
+      radial-gradient(
+        ellipse at 20% 80%,
+        hsla(var(--primary), 0.03) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 20%,
+        hsla(var(--accent), 0.02) 0%,
+        transparent 50%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        hsla(var(--shadow-deep), 0.8) 100%
+      );
   }
-  
+
   body {
     @apply antialiased selection:bg-primary/20;
   }
-  
+
   /* Gothic library gradients and effects */
   .gothic-gradient {
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--leather)) 50%, hsl(var(--card)) 100%);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--leather)) 50%,
+      hsl(var(--card)) 100%
+    );
     border: 1px solid hsl(var(--border));
   }
-  
+
   .leather-texture {
     background: hsl(var(--leather));
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
+    background-image:
+      radial-gradient(
+        circle at 25% 25%,
+        rgba(0, 0, 0, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        rgba(0, 0, 0, 0.05) 0%,
+        transparent 50%
+      );
     border: 1px solid hsl(var(--border));
   }
-  
+
   .parchment-effect {
     background: hsl(var(--card));
-    background-image: 
-      linear-gradient(45deg, transparent 25%, hsla(var(--candlelight), 0.02) 25%, hsla(var(--candlelight), 0.02) 50%, transparent 50%);
+    background-image: linear-gradient(
+      45deg,
+      transparent 25%,
+      hsla(var(--candlelight), 0.02) 25%,
+      hsla(var(--candlelight), 0.02) 50%,
+      transparent 50%
+    );
     border: 1px solid hsla(var(--brass), 0.2);
   }
-  
+
   .candlelight-glow {
-    box-shadow: 
+    box-shadow:
       0 0 20px hsla(var(--primary), 0.3),
       0 0 40px hsla(var(--primary), 0.1),
       inset 0 0 20px hsla(var(--primary), 0.05);
   }
-  
+
   .book-spine-shadow {
-    box-shadow: 
+    box-shadow:
       0 4px 8px -2px rgba(0, 0, 0, 0.4),
       0 2px 4px -1px rgba(0, 0, 0, 0.3),
       inset -2px 0 4px rgba(0, 0, 0, 0.2);
   }
-  
+
   .deep-library-shadow {
-    box-shadow: 
+    box-shadow:
       0 10px 25px -5px rgba(0, 0, 0, 0.5),
       0 20px 25px -5px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 hsla(var(--candlelight), 0.1);
   }
-  
+
   .aged-paper {
-    background-image: 
-      radial-gradient(circle at 30% 40%, hsla(var(--candlelight), 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 70% 60%, hsla(var(--brass), 0.02) 0%, transparent 50%);
+    background-image:
+      radial-gradient(
+        circle at 30% 40%,
+        hsla(var(--candlelight), 0.03) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 70% 60%,
+        hsla(var(--brass), 0.02) 0%,
+        transparent 50%
+      );
   }
-  
+
   .gothic-border {
     border: 2px solid hsl(var(--border));
     border-radius: 0.5rem;
     position: relative;
   }
-  
+
   .gothic-border::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: -1px;
     border: 1px solid hsla(var(--brass), 0.3);
     border-radius: 0.5rem;
     pointer-events: none;
   }
-  
+
   /* Interactive library effects */
   .book-hover {
     transition: all 0.3s ease-in-out;
   }
-  
+
   .book-hover:hover {
     transform: translateY(-3px) rotateX(5deg);
-    box-shadow: 
+    box-shadow:
       0 15px 35px -5px rgba(0, 0, 0, 0.6),
       0 25px 35px -5px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 hsla(var(--candlelight), 0.2);
   }
-  
+
   /* Warm glow effects */
   .warm-glow {
-    text-shadow: 
+    text-shadow:
       0 0 10px hsla(var(--primary), 0.5),
       0 0 20px hsla(var(--primary), 0.3);
   }
-  
+
   .brass-accent {
     color: hsl(var(--brass));
     text-shadow: 0 0 8px hsla(var(--brass), 0.4);
   }
-  
+
   /* Enhanced dropdown hover styles */
   [data-radix-select-item] {
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
-  
+
   [data-radix-select-item]:hover {
     background: hsl(var(--leather)) !important;
     color: hsl(var(--foreground)) !important;
     transform: translateX(2px);
   }
-  
+
   [data-radix-select-item][data-highlighted] {
     background: hsl(var(--primary)) !important;
     color: hsl(var(--primary-foreground)) !important;
     outline: none;
   }
-  
+
   [data-radix-select-trigger] {
     cursor: pointer;
   }
-  
+
   [data-radix-select-trigger]:hover {
     border-color: hsl(var(--primary)) !important;
     background: hsl(var(--leather)) !important;
@@ -170,35 +208,35 @@
   .btn-primary {
     @apply px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg candlelight-glow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  
+
   .btn-secondary {
     @apply px-6 py-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium rounded-lg border border-border hover:border-primary/30 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
-  
+
   .btn-success {
     @apply px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
-  
+
   .btn-danger {
     @apply px-6 py-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2 focus:ring-offset-background transition-all duration-200;
   }
-  
+
   .card {
     @apply bg-card/95 backdrop-blur-sm border border-border rounded-xl deep-library-shadow p-6;
   }
-  
+
   .input {
     @apply w-full px-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent aged-paper transition-all duration-200;
   }
-  
+
   .nav-link {
     @apply px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded-lg font-medium transition-all duration-200;
   }
-  
+
   .status-badge {
     @apply px-3 py-1 text-xs font-medium rounded-full;
   }
-  
+
   .loading-spinner {
     @apply animate-spin w-6 h-6 border-2 border-muted border-t-primary rounded-full;
   }

@@ -514,3 +514,84 @@ Processing by Api::ItemsController#index as HTML
 Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.1ms (3 queries, 0 cached) | GC: 0.8ms)
 
 
+Started GET "/api/auth/me" for ::1 at 2025-07-31 15:03:50 -0400
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/auth/me" for ::1 at 2025-07-31 15:03:50 -0400
+Started GET "/api/items?sort=updated_at&per_page=10&include_count=true&debug=true" for ::1 at 2025-07-31 15:03:50 -0400
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+[31mUnpermitted parameters: :per_page, :include_count, :debug. Context: { controller: Api::ItemsController, action: index, request: #<ActionDispatch::Request:0x000000012e99c800>, params: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true", "controller" => "api/items", "action" => "index"} }[0m
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."user_id" = 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:33:in 'Api::ItemsController#index'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 1 ORDER BY "items"."updated_at" DESC LIMIT 10 OFFSET 0 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:46:in 'Api::ItemsController#index'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.9ms (3 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/api/items?sort=updated_at&per_page=10&include_count=true&debug=true" for ::1 at 2025-07-31 15:03:50 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+[31mUnpermitted parameters: :per_page, :include_count, :debug. Context: { controller: Api::ItemsController, action: index, request: #<ActionDispatch::Request:0x000000012e6fb6a0>, params: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true", "controller" => "api/items", "action" => "index"} }[0m
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."user_id" = 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:33:in 'Api::ItemsController#index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 1 ORDER BY "items"."updated_at" DESC LIMIT 10 OFFSET 0 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:46:in 'Api::ItemsController#index'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/auth/me" for ::1 at 2025-07-31 15:03:53 -0400
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/auth/me" for ::1 at 2025-07-31 15:03:53 -0400
+Started GET "/api/items?sort=updated_at&per_page=10&include_count=true&debug=true" for ::1 at 2025-07-31 15:03:53 -0400
+Processing by Api::AuthController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='WishlistBackend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+[31mUnpermitted parameters: :per_page, :include_count, :debug. Context: { controller: Api::ItemsController, action: index, request: #<ActionDispatch::Request:0x000000012e375648>, params: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true", "controller" => "api/items", "action" => "index"} }[0m
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."user_id" = 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:33:in 'Api::ItemsController#index'
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 1 ORDER BY "items"."updated_at" DESC LIMIT 10 OFFSET 0 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:46:in 'Api::ItemsController#index'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/items?sort=updated_at&per_page=10&include_count=true&debug=true" for ::1 at 2025-07-31 15:03:53 -0400
+Processing by Api::ItemsController#index as HTML
+  Parameters: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#authenticate_request'
+[31mUnpermitted parameters: :per_page, :include_count, :debug. Context: { controller: Api::ItemsController, action: index, request: #<ActionDispatch::Request:0x000000012e1142f0>, params: {"sort" => "updated_at", "per_page" => "10", "include_count" => "true", "debug" => "true", "controller" => "api/items", "action" => "index"} }[0m
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."user_id" = 1 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:33:in 'Api::ItemsController#index'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."user_id" = 1 ORDER BY "items"."updated_at" DESC LIMIT 10 OFFSET 0 /*action='index',application='WishlistBackend',controller='items'*/[0m
+  ↳ app/controllers/api/items_controller.rb:46:in 'Api::ItemsController#index'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.9ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+- Gracefully stopping, waiting for requests to finish

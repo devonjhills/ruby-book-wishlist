@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { ScrollArea } from './ui/scroll-area';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from './ui/tabs';
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { ScrollArea } from "./ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from './ui/collapsible';
+} from "./ui/collapsible";
 import {
   ChevronDown,
   ChevronRight,
@@ -29,8 +24,8 @@ import {
   Eye,
   TrendingUp,
   Timer,
-  Activity
-} from 'lucide-react';
+  Activity,
+} from "lucide-react";
 
 const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
   const [expandedSections, setExpandedSections] = useState(new Set());
@@ -50,73 +45,107 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
   // Rails process steps data
   const railsProcessSteps = [
     {
-      id: 'routing',
-      step: 'Route Resolution',
-      code: 'GET /api/items → ItemsController#index',
-      description: 'Rails router matches URL to controller action',
+      id: "routing",
+      step: "Route Resolution",
+      code: "GET /api/items → ItemsController#index",
+      description: "Rails router matches URL to controller action",
       icon: Server,
-      details: 'The Rails router analyzes the HTTP method and URL path against routes defined in config/routes.rb, determining which controller action should handle this request.'
+      details:
+        "The Rails router analyzes the HTTP method and URL path against routes defined in config/routes.rb, determining which controller action should handle this request.",
     },
     {
-      id: 'middleware',
-      step: 'Middleware Stack',
-      code: 'ActionDispatch::MiddlewareStack.build',
-      description: 'Request passes through Rails middleware layers',
+      id: "middleware",
+      step: "Middleware Stack",
+      code: "ActionDispatch::MiddlewareStack.build",
+      description: "Request passes through Rails middleware layers",
       icon: Layers,
-      details: 'Rails processes the request through middleware: CORS, JWT authentication, request logging, and session management.'
+      details:
+        "Rails processes the request through middleware: CORS, JWT authentication, request logging, and session management.",
     },
     {
-      id: 'controller',
-      step: 'Controller Processing',
-      code: 'before_action :require_authentication',
-      description: 'Controller validates authentication and processes request',
+      id: "controller",
+      step: "Controller Processing",
+      code: "before_action :require_authentication",
+      description: "Controller validates authentication and processes request",
       icon: Code,
-      details: 'Rails instantiates the controller, runs before_action callbacks for authentication, and executes the main action.'
+      details:
+        "Rails instantiates the controller, runs before_action callbacks for authentication, and executes the main action.",
     },
     {
-      id: 'database',
-      step: 'Database Query',
-      code: 'Item.advanced_search_for_user(user_id, params)',
-      description: 'Active Record builds and executes optimized SQL',
+      id: "database",
+      step: "Database Query",
+      code: "Item.advanced_search_for_user(user_id, params)",
+      description: "Active Record builds and executes optimized SQL",
       icon: Database,
-      details: 'Rails uses Active Record to generate optimized SQL queries with proper indexing, caching, and security measures.'
+      details:
+        "Rails uses Active Record to generate optimized SQL queries with proper indexing, caching, and security measures.",
     },
     {
-      id: 'response',
-      step: 'JSON Response',
-      code: 'render json: { items: items, stats: stats }',
-      description: 'Rails serializes data and sends HTTP response',
+      id: "response",
+      step: "JSON Response",
+      code: "render json: { items: items, stats: stats }",
+      description: "Rails serializes data and sends HTTP response",
       icon: Activity,
-      details: 'Rails converts Active Record objects to JSON, sets appropriate headers, and sends the response back to the client.'
-    }
+      details:
+        "Rails converts Active Record objects to JSON, sets appropriate headers, and sends the response back to the client.",
+    },
   ];
 
   // Middleware stack data
   const middlewareStack = [
-    { name: 'Rack::Cors', purpose: 'CORS Security', description: 'Handles cross-origin requests for API access' },
-    { name: 'ActionDispatch::RequestId', purpose: 'Request Tracking', description: 'Generates unique request IDs for logging' },
-    { name: 'ActionDispatch::RemoteIp', purpose: 'IP Detection', description: 'Determines real client IP behind proxies' },
-    { name: 'JWT Authentication', purpose: 'API Security', description: 'Validates JWT tokens for authenticated requests' },
-    { name: 'ActionDispatch::Routing', purpose: 'URL Routing', description: 'Maps URLs to controller actions' }
+    {
+      name: "Rack::Cors",
+      purpose: "CORS Security",
+      description: "Handles cross-origin requests for API access",
+    },
+    {
+      name: "ActionDispatch::RequestId",
+      purpose: "Request Tracking",
+      description: "Generates unique request IDs for logging",
+    },
+    {
+      name: "ActionDispatch::RemoteIp",
+      purpose: "IP Detection",
+      description: "Determines real client IP behind proxies",
+    },
+    {
+      name: "JWT Authentication",
+      purpose: "API Security",
+      description: "Validates JWT tokens for authenticated requests",
+    },
+    {
+      name: "ActionDispatch::Routing",
+      purpose: "URL Routing",
+      description: "Maps URLs to controller actions",
+    },
   ];
 
   const getPerformanceRating = (duration) => {
-    if (duration < 1) return { rating: 'Excellent', color: 'text-green-600', icon: '🚀' };
-    if (duration < 10) return { rating: 'Good', color: 'text-blue-600', icon: '⚡' };
-    if (duration < 50) return { rating: 'Fair', color: 'text-yellow-600', icon: '⚠️' };
-    return { rating: 'Slow', color: 'text-red-600', icon: '🐌' };
+    if (duration < 1)
+      return { rating: "Excellent", color: "text-green-600", icon: "🚀" };
+    if (duration < 10)
+      return { rating: "Good", color: "text-blue-600", icon: "⚡" };
+    if (duration < 50)
+      return { rating: "Fair", color: "text-yellow-600", icon: "⚠️" };
+    return { rating: "Slow", color: "text-red-600", icon: "🐌" };
   };
 
   const formatSqlQuery = (sql) => {
     return sql
-      .replace(/\b(SELECT|FROM|WHERE|JOIN|LEFT JOIN|RIGHT JOIN|INNER JOIN|ORDER BY|GROUP BY|HAVING|LIMIT|OFFSET|INSERT|UPDATE|DELETE|SET|VALUES)\b/gi, '\n$1')
-      .replace(/\bAND\b/gi, '\n  AND')
-      .replace(/\bOR\b/gi, '\n  OR')
+      .replace(
+        /\b(SELECT|FROM|WHERE|JOIN|LEFT JOIN|RIGHT JOIN|INNER JOIN|ORDER BY|GROUP BY|HAVING|LIMIT|OFFSET|INSERT|UPDATE|DELETE|SET|VALUES)\b/gi,
+        "\n$1",
+      )
+      .replace(/\bAND\b/gi, "\n  AND")
+      .replace(/\bOR\b/gi, "\n  OR")
       .trim();
   };
 
-  const totalDuration = debugInfo?.sql_queries?.reduce((sum, q) => sum + q.duration_ms, 0) || 0;
-  const avgDuration = debugInfo?.sql_queries?.length ? totalDuration / debugInfo.sql_queries.length : 0;
+  const totalDuration =
+    debugInfo?.sql_queries?.reduce((sum, q) => sum + q.duration_ms, 0) || 0;
+  const avgDuration = debugInfo?.sql_queries?.length
+    ? totalDuration / debugInfo.sql_queries.length
+    : 0;
 
   return (
     <Card className="mt-8 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
@@ -128,13 +157,19 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
             </div>
             <div>
               <CardTitle className="flex items-center gap-2">
-                <span className="text-xl font-bold">Rails Framework Deep Dive</span>
-                <Badge variant="outline" className="bg-primary/10 border-primary/30 text-primary">
+                <span className="text-xl font-bold">
+                  Rails Framework Deep Dive
+                </span>
+                <Badge
+                  variant="outline"
+                  className="bg-primary/10 border-primary/30 text-primary"
+                >
                   Educational Mode
                 </Badge>
               </CardTitle>
               <p className="text-sm text-muted-foreground mt-1">
-                Interactive exploration of Ruby on Rails architecture, database optimization, and web development patterns
+                Interactive exploration of Ruby on Rails architecture, database
+                optimization, and web development patterns
               </p>
             </div>
           </div>
@@ -163,7 +198,10 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
               <Layers className="w-4 h-4" />
               Middleware
             </TabsTrigger>
-            <TabsTrigger value="performance" className="flex items-center gap-2">
+            <TabsTrigger
+              value="performance"
+              className="flex items-center gap-2"
+            >
               <BarChart3 className="w-4 h-4" />
               Performance
             </TabsTrigger>
@@ -177,7 +215,8 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 Rails Request Processing Pipeline
               </h3>
               <p className="text-sm text-muted-foreground">
-                Follow the journey of an HTTP request through the Rails framework, from URL routing to JSON response.
+                Follow the journey of an HTTP request through the Rails
+                framework, from URL routing to JSON response.
               </p>
             </div>
 
@@ -185,11 +224,11 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
               {railsProcessSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isExpanded = expandedSections.has(step.id);
-                
+
                 return (
                   <Card key={step.id} className="border-border">
                     <Collapsible>
-                      <CollapsibleTrigger 
+                      <CollapsibleTrigger
                         className="w-full"
                         onClick={() => toggleSection(step.id)}
                       >
@@ -201,12 +240,15 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                             <div className="flex-1 text-left">
                               <div className="flex items-center justify-between">
                                 <h4 className="font-medium">{step.step}</h4>
-                                {isExpanded ? 
-                                  <ChevronDown className="w-4 h-4 text-muted-foreground" /> : 
+                                {isExpanded ? (
+                                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                                ) : (
                                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                                }
+                                )}
                               </div>
-                              <p className="text-sm text-muted-foreground mt-1">{step.description}</p>
+                              <p className="text-sm text-muted-foreground mt-1">
+                                {step.description}
+                              </p>
                               <code className="text-xs bg-muted px-2 py-1 rounded mt-2 inline-block font-mono text-primary">
                                 {step.code}
                               </code>
@@ -214,12 +256,16 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                           </div>
                         </div>
                       </CollapsibleTrigger>
-                      
+
                       <CollapsibleContent>
                         <div className="px-4 pb-4 border-t bg-accent/5">
                           <div className="mt-3">
-                            <h5 className="text-sm font-semibold text-primary mb-2">💎 Framework Deep Dive:</h5>
-                            <p className="text-sm text-muted-foreground leading-relaxed">{step.details}</p>
+                            <h5 className="text-sm font-semibold text-primary mb-2">
+                              💎 Framework Deep Dive:
+                            </h5>
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              {step.details}
+                            </p>
                           </div>
                         </div>
                       </CollapsibleContent>
@@ -238,7 +284,8 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 Database Performance Analysis
               </h3>
               <p className="text-sm text-muted-foreground">
-                Real-time SQL query monitoring, performance metrics, and database optimization insights.
+                Real-time SQL query monitoring, performance metrics, and
+                database optimization insights.
               </p>
             </div>
 
@@ -253,7 +300,9 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                         <span className="text-sm font-medium">Total Time</span>
                       </div>
                       <div className="text-2xl font-bold text-blue-600">
-                        {debugInfo.query_duration_ms?.toFixed(1) || totalDuration.toFixed(1)}ms
+                        {debugInfo.query_duration_ms?.toFixed(1) ||
+                          totalDuration.toFixed(1)}
+                        ms
                       </div>
                     </CardContent>
                   </Card>
@@ -284,62 +333,84 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 </div>
 
                 {/* Index Usage */}
-                {debugInfo.indexes_used && debugInfo.indexes_used.length > 0 && (
-                  <Card className="mb-4">
-                    <CardHeader>
-                      <CardTitle className="text-sm flex items-center gap-2">
-                        <Hash className="w-4 h-4 text-blue-600" />
-                        Database Indexes Used
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2">
-                        {debugInfo.indexes_used.map((index, i) => (
-                          <Badge key={i} variant="outline" className="bg-blue-50 border-blue-200 text-blue-700">
-                            {index.replace('index_items_on_', '')}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
+                {debugInfo.indexes_used &&
+                  debugInfo.indexes_used.length > 0 && (
+                    <Card className="mb-4">
+                      <CardHeader>
+                        <CardTitle className="text-sm flex items-center gap-2">
+                          <Hash className="w-4 h-4 text-blue-600" />
+                          Database Indexes Used
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex flex-wrap gap-2">
+                          {debugInfo.indexes_used.map((index, i) => (
+                            <Badge
+                              key={i}
+                              variant="outline"
+                              className="bg-blue-50 border-blue-200 text-blue-700"
+                            >
+                              {index.replace("index_items_on_", "")}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
 
                 {/* SQL Queries */}
                 {debugInfo.sql_queries && debugInfo.sql_queries.length > 0 && (
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-sm">SQL Queries Executed</CardTitle>
+                      <CardTitle className="text-sm">
+                        SQL Queries Executed
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ScrollArea className="max-h-96">
                         <div className="space-y-3">
                           {debugInfo.sql_queries.map((query, index) => {
-                            const performance = getPerformanceRating(query.duration_ms);
-                            const isExpanded = expandedSections.has(`query-${index}`);
-                            
+                            const performance = getPerformanceRating(
+                              query.duration_ms,
+                            );
+                            const isExpanded = expandedSections.has(
+                              `query-${index}`,
+                            );
+
                             return (
                               <Card key={index} className="border">
                                 <Collapsible>
-                                  <CollapsibleTrigger 
+                                  <CollapsibleTrigger
                                     className="w-full"
-                                    onClick={() => toggleSection(`query-${index}`)}
+                                    onClick={() =>
+                                      toggleSection(`query-${index}`)
+                                    }
                                   >
                                     <div className="p-3 hover:bg-muted/50 transition-colors">
                                       <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
-                                          <Badge variant="outline" className="text-xs">
-                                            {query.type || 'SQL'}
+                                          <Badge
+                                            variant="outline"
+                                            className="text-xs"
+                                          >
+                                            {query.type || "SQL"}
                                           </Badge>
-                                          <span className="text-sm">Query #{index + 1}</span>
+                                          <span className="text-sm">
+                                            Query #{index + 1}
+                                          </span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                          <span className={`text-sm font-medium ${performance.color}`}>
-                                            {performance.icon} {query.duration_ms.toFixed(2)}ms
+                                          <span
+                                            className={`text-sm font-medium ${performance.color}`}
+                                          >
+                                            {performance.icon}{" "}
+                                            {query.duration_ms.toFixed(2)}ms
                                           </span>
-                                          {isExpanded ? 
-                                            <ChevronDown className="w-4 h-4" /> : 
+                                          {isExpanded ? (
+                                            <ChevronDown className="w-4 h-4" />
+                                          ) : (
                                             <ChevronRight className="w-4 h-4" />
-                                          }
+                                          )}
                                         </div>
                                       </div>
                                       <div className="text-left mt-2">
@@ -349,16 +420,25 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                                       </div>
                                     </div>
                                   </CollapsibleTrigger>
-                                  
+
                                   <CollapsibleContent>
                                     <div className="border-t p-3 bg-slate-50 dark:bg-slate-900/50">
-                                      <h5 className="text-sm font-semibold mb-2">Formatted SQL:</h5>
+                                      <h5 className="text-sm font-semibold mb-2">
+                                        Formatted SQL:
+                                      </h5>
                                       <pre className="text-xs bg-slate-900 text-green-400 p-3 rounded overflow-x-auto font-mono">
                                         {formatSqlQuery(query.sql)}
                                       </pre>
                                       <div className="mt-3 text-sm">
-                                        <p><strong>Performance:</strong> {performance.rating} ({query.duration_ms.toFixed(2)}ms)</p>
-                                        <p><strong>Type:</strong> {query.type || 'Unknown'}</p>
+                                        <p>
+                                          <strong>Performance:</strong>{" "}
+                                          {performance.rating} (
+                                          {query.duration_ms.toFixed(2)}ms)
+                                        </p>
+                                        <p>
+                                          <strong>Type:</strong>{" "}
+                                          {query.type || "Unknown"}
+                                        </p>
                                       </div>
                                     </div>
                                   </CollapsibleContent>
@@ -383,7 +463,8 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 Rails Middleware Stack
               </h3>
               <p className="text-sm text-muted-foreground">
-                Understanding the middleware layers that process every HTTP request in Rails applications.
+                Understanding the middleware layers that process every HTTP
+                request in Rails applications.
               </p>
             </div>
 
@@ -393,16 +474,23 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                        <span className="text-sm font-bold text-purple-600">{index + 1}</span>
+                        <span className="text-sm font-bold text-purple-600">
+                          {index + 1}
+                        </span>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <h4 className="font-medium">{middleware.name}</h4>
-                          <Badge variant="outline" className="text-xs bg-purple-50 border-purple-200 text-purple-700">
+                          <Badge
+                            variant="outline"
+                            className="text-xs bg-purple-50 border-purple-200 text-purple-700"
+                          >
                             {middleware.purpose}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{middleware.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {middleware.description}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -419,47 +507,72 @@ const RailsTeachingPanel = ({ debugInfo, isVisible = false, onToggle }) => {
                 Performance Insights
               </h3>
               <p className="text-sm text-muted-foreground">
-                Learn about Rails performance optimization, caching strategies, and best practices.
+                Learn about Rails performance optimization, caching strategies,
+                and best practices.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-sm">🚀 Optimization Tips</CardTitle>
+                  <CardTitle className="text-sm">
+                    🚀 Optimization Tips
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Database Indexing</h5>
-                    <p className="text-muted-foreground">Strategic indexes on user_id, status, and search fields improve query performance by 10-100x.</p>
+                    <p className="text-muted-foreground">
+                      Strategic indexes on user_id, status, and search fields
+                      improve query performance by 10-100x.
+                    </p>
                   </div>
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Active Record Caching</h5>
-                    <p className="text-muted-foreground">Rails.cache reduces database load for frequently accessed data like dashboard statistics.</p>
+                    <p className="text-muted-foreground">
+                      Rails.cache reduces database load for frequently accessed
+                      data like dashboard statistics.
+                    </p>
                   </div>
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">N+1 Query Prevention</h5>
-                    <p className="text-muted-foreground">Using includes() prevents multiple database queries when loading associated records.</p>
+                    <p className="text-muted-foreground">
+                      Using includes() prevents multiple database queries when
+                      loading associated records.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-sm">📚 Learning Resources</CardTitle>
+                  <CardTitle className="text-sm">
+                    📚 Learning Resources
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Rails Guides</h5>
-                    <p className="text-muted-foreground">Official Rails documentation covers Active Record, routing, and performance optimization.</p>
+                    <p className="text-muted-foreground">
+                      Official Rails documentation covers Active Record,
+                      routing, and performance optimization.
+                    </p>
                   </div>
                   <div className="text-sm">
                     <h5 className="font-medium mb-1">Database Design</h5>
-                    <p className="text-muted-foreground">Understanding indexes, constraints, and query optimization for PostgreSQL.</p>
+                    <p className="text-muted-foreground">
+                      Understanding indexes, constraints, and query optimization
+                      for PostgreSQL.
+                    </p>
                   </div>
                   <div className="text-sm">
-                    <h5 className="font-medium mb-1">Security Best Practices</h5>
-                    <p className="text-muted-foreground">JWT authentication, parameter filtering, and CORS configuration for API security.</p>
+                    <h5 className="font-medium mb-1">
+                      Security Best Practices
+                    </h5>
+                    <p className="text-muted-foreground">
+                      JWT authentication, parameter filtering, and CORS
+                      configuration for API security.
+                    </p>
                   </div>
                 </CardContent>
               </Card>

@@ -1,12 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authAPI } from '../services/api';
+import { createContext, useContext, useState, useEffect } from "react";
+import { authAPI } from "../services/api";
 
 const AuthContext = createContext();
+
+// eslint-disable-next-line react-refresh/only-export-components
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -16,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       checkCurrentUser();
     } else {
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.me();
       setUser(response.data.user);
     } catch {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     } finally {
       setLoading(false);
     }
@@ -38,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     const response = await authAPI.login(credentials);
     const { token, user } = response.data;
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     setUser(user);
     return response;
   };
@@ -46,13 +48,13 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     const response = await authAPI.register(userData);
     const { token, user } = response.data;
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     setUser(user);
     return response;
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
   };
 
@@ -65,9 +67,5 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: !!user,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

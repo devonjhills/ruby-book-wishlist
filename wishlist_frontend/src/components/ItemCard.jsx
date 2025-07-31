@@ -1,54 +1,81 @@
-import React, { useState } from 'react';
-import { itemsAPI } from '../services/api';
-import { Card, CardContent } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
-import { Edit3, Trash2, Save, X, Star, BookOpen, User, Calendar, Eye, ExternalLink } from 'lucide-react';
+import { useState } from "react";
+import { itemsAPI } from "../services/api";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import {
+  Edit3,
+  Trash2,
+  Save,
+  X,
+  Star,
+  BookOpen,
+  User,
+  Calendar,
+  Eye,
+  ExternalLink,
+} from "lucide-react";
 
 const ItemCard = ({ item, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState({
     status: item.status,
-    rating: item.rating || '',
-    description: item.description || '',
-    notes: item.notes || '',
+    rating: item.rating || "",
+    description: item.description || "",
+    notes: item.notes || "",
   });
   const [loading, setLoading] = useState(false);
 
   const getBriefSynopsis = (description) => {
     if (!description) return null;
-    
+
     // Split into sentences and take first 1-2 sentences, max 150 chars
-    const sentences = description.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    
+    const sentences = description
+      .split(/[.!?]+/)
+      .filter((s) => s.trim().length > 0);
+
     if (sentences.length === 0) return null;
-    
+
     let synopsis = sentences[0].trim();
-    
+
     // If first sentence is very short and we have a second sentence, include it
     if (synopsis.length < 50 && sentences.length > 1) {
-      synopsis += '. ' + sentences[1].trim();
+      synopsis += ". " + sentences[1].trim();
     }
-    
+
     // Truncate if still too long
     if (synopsis.length > 150) {
-      synopsis = synopsis.substring(0, 147) + '...';
+      synopsis = synopsis.substring(0, 147) + "...";
     } else if (synopsis.length > 0 && !synopsis.match(/[.!?]$/)) {
-      synopsis += '...';
+      synopsis += "...";
     }
-    
+
     return synopsis;
   };
 
   const handleStatusChange = async (newStatus) => {
     try {
       setLoading(true);
-      const response = await itemsAPI.updateItem(item.id, { status: newStatus });
+      const response = await itemsAPI.updateItem(item.id, {
+        status: newStatus,
+      });
       onUpdate(response.data);
     } catch (error) {
-      console.error('Failed to update item:', error);
+      console.error("Failed to update item:", error);
     } finally {
       setLoading(false);
     }
@@ -61,20 +88,24 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
       onUpdate(response.data);
       setIsEditing(false);
     } catch (error) {
-      console.error('Failed to update item:', error);
+      console.error("Failed to update item:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this book from your collection?')) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this book from your collection?",
+      )
+    ) {
       try {
         setLoading(true);
         await itemsAPI.deleteItem(item.id);
         onDelete(item.id);
       } catch (error) {
-        console.error('Failed to delete item:', error);
+        console.error("Failed to delete item:", error);
       } finally {
         setLoading(false);
       }
@@ -83,32 +114,34 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
 
   const getStatusConfig = (status) => {
     const statusMap = {
-      want_to_read: { 
-        label: 'Want to Read', 
-        icon: '📚',
-        className: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-        bgClass: 'bg-blue-50 dark:bg-blue-950/30'
+      want_to_read: {
+        label: "Want to Read",
+        icon: "📚",
+        className: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+        bgClass: "bg-blue-50 dark:bg-blue-950/30",
       },
-      currently_reading: { 
-        label: 'Currently Reading', 
-        icon: '📖',
-        className: 'bg-green-500/20 text-green-400 border-green-500/30',
-        bgClass: 'bg-green-50 dark:bg-green-950/30'
+      currently_reading: {
+        label: "Currently Reading",
+        icon: "📖",
+        className: "bg-green-500/20 text-green-400 border-green-500/30",
+        bgClass: "bg-green-50 dark:bg-green-950/30",
       },
-      completed: { 
-        label: 'Completed', 
-        icon: '✅',
-        className: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-        bgClass: 'bg-purple-50 dark:bg-purple-950/30'
+      completed: {
+        label: "Completed",
+        icon: "✅",
+        className: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+        bgClass: "bg-purple-50 dark:bg-purple-950/30",
       },
     };
-    
-    return statusMap[status] || { 
-      label: 'Unknown', 
-      icon: '❓',
-      className: 'bg-muted text-muted-foreground border-muted',
-      bgClass: 'bg-slate-50 dark:bg-slate-900/50'
-    };
+
+    return (
+      statusMap[status] || {
+        label: "Unknown",
+        icon: "❓",
+        className: "bg-muted text-muted-foreground border-muted",
+        bgClass: "bg-slate-50 dark:bg-slate-900/50",
+      }
+    );
   };
 
   const statusConfig = getStatusConfig(item.status);
@@ -121,9 +154,9 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
           <Star
             key={star}
             className={`w-4 h-4 ${
-              star <= rating 
-                ? 'text-yellow-400 fill-yellow-400' 
-                : 'text-muted-foreground'
+              star <= rating
+                ? "text-yellow-400 fill-yellow-400"
+                : "text-muted-foreground"
             }`}
           />
         ))}
@@ -132,7 +165,9 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
   };
 
   return (
-    <Card className={`group border border-slate-200 dark:border-slate-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/40 overflow-hidden ${statusConfig.bgClass}`}>
+    <Card
+      className={`group border border-slate-200 dark:border-slate-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/40 overflow-hidden ${statusConfig.bgClass}`}
+    >
       {/* Book Cover or Placeholder */}
       <div className="relative h-48 bg-slate-100 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
         {item.cover_image_url ? (
@@ -146,15 +181,17 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
             <BookOpen className="w-16 h-16 text-primary/50" />
           </div>
         )}
-        
+
         {/* Status Badge Overlay */}
         <div className="absolute top-3 left-3">
-          <Badge className={`${statusConfig.className} shadow-lg backdrop-blur-sm border`}>
+          <Badge
+            className={`${statusConfig.className} shadow-lg backdrop-blur-sm border`}
+          >
             <span className="mr-1">{statusConfig.icon}</span>
             {statusConfig.label}
           </Badge>
         </div>
-        
+
         {/* Action Buttons Overlay */}
         <div className="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <Dialog>
@@ -175,14 +212,18 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
                     <BookOpen className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-foreground font-bold">{item.title || 'Untitled Book'}</h2>
+                    <h2 className="text-foreground font-bold">
+                      {item.title || "Untitled Book"}
+                    </h2>
                     {item.author_or_director && (
-                      <p className="text-sm text-muted-foreground">by {item.author_or_director}</p>
+                      <p className="text-sm text-muted-foreground">
+                        by {item.author_or_director}
+                      </p>
                     )}
                   </div>
                 </DialogTitle>
               </DialogHeader>
-              
+
               <div className="space-y-6 mt-4">
                 {/* Book Cover and Basic Info */}
                 <div className="flex gap-6">
@@ -199,7 +240,7 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="flex-1 space-y-4">
                     {/* Status Badge */}
                     <div>
@@ -208,71 +249,91 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
                         {statusConfig.label}
                       </Badge>
                     </div>
-                    
+
                     {/* Rating */}
                     {item.rating && (
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-1">Rating</h4>
+                        <h4 className="text-sm font-semibold text-foreground mb-1">
+                          Rating
+                        </h4>
                         <div className="flex items-center gap-2">
                           {renderStars(item.rating)}
-                          <span className="text-sm text-muted-foreground">({item.rating}/5 stars)</span>
+                          <span className="text-sm text-muted-foreground">
+                            ({item.rating}/5 stars)
+                          </span>
                         </div>
                       </div>
                     )}
-                    
+
                     {/* Publication Year */}
                     {item.release_year && (
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-1">Published</h4>
+                        <h4 className="text-sm font-semibold text-foreground mb-1">
+                          Published
+                        </h4>
                         <div className="flex items-center gap-1 text-sm text-muted-foreground">
                           <Calendar className="w-3 h-3" />
                           {item.release_year}
                         </div>
                       </div>
                     )}
-                    
+
                     {/* Genre */}
                     {item.genre && (
                       <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-1">Genre</h4>
-                        <Badge variant="outline" className="bg-primary/10 border-primary/30 text-primary">
+                        <h4 className="text-sm font-semibold text-foreground mb-1">
+                          Genre
+                        </h4>
+                        <Badge
+                          variant="outline"
+                          className="bg-primary/10 border-primary/30 text-primary"
+                        >
                           {item.genre}
                         </Badge>
                       </div>
                     )}
                   </div>
                 </div>
-                
+
                 {/* Description */}
                 {item.description && (
                   <div>
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Description</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                      Description
+                    </h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {item.description}
                     </p>
                   </div>
                 )}
-                
+
                 {/* Personal Notes */}
                 {item.notes && (
                   <div>
-                    <h4 className="text-sm font-semibold text-foreground mb-2">My Notes</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                      My Notes
+                    </h4>
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
-                      <p className="text-sm text-foreground">
-                        {item.notes}
-                      </p>
+                      <p className="text-sm text-foreground">{item.notes}</p>
                     </div>
                   </div>
                 )}
-                
+
                 {/* External Link */}
                 {item.external_id && (
                   <div>
-                    <h4 className="text-sm font-semibold text-foreground mb-2">More Information</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                      More Information
+                    </h4>
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.open(`https://openlibrary.org${item.external_id}`, '_blank')}
+                      onClick={() =>
+                        window.open(
+                          `https://openlibrary.org${item.external_id}`,
+                          "_blank",
+                        )
+                      }
                       className="flex items-center gap-2"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -280,23 +341,31 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
                     </Button>
                   </div>
                 )}
-                
+
                 {/* Metadata */}
                 <div className="pt-4 border-t border-border">
-                  <h4 className="text-sm font-semibold text-foreground mb-2">Details</h4>
+                  <h4 className="text-sm font-semibold text-foreground mb-2">
+                    Details
+                  </h4>
                   <div className="grid grid-cols-2 gap-4 text-xs text-muted-foreground">
                     <div>
-                      <span className="font-medium">Added:</span> {new Date(item.created_at || Date.now()).toLocaleDateString()}
+                      <span className="font-medium">Added:</span>{" "}
+                      {new Date(
+                        item.created_at || Date.now(),
+                      ).toLocaleDateString()}
                     </div>
                     <div>
-                      <span className="font-medium">Last Updated:</span> {new Date(item.updated_at || Date.now()).toLocaleDateString()}
+                      <span className="font-medium">Last Updated:</span>{" "}
+                      {new Date(
+                        item.updated_at || Date.now(),
+                      ).toLocaleDateString()}
                     </div>
                   </div>
                 </div>
               </div>
             </DialogContent>
           </Dialog>
-          
+
           <Button
             variant="ghost"
             size="sm"
@@ -324,7 +393,7 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
             {/* Book Title and Author */}
             <div>
               <h3 className="font-bold text-lg leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                {item.title || 'Untitled Book'}
+                {item.title || "Untitled Book"}
               </h3>
               {item.author_or_director && (
                 <p className="text-muted-foreground text-sm flex items-center gap-1">
@@ -339,7 +408,9 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
               {item.rating && (
                 <div className="flex items-center gap-2">
                   {renderStars(item.rating)}
-                  <span className="text-sm text-muted-foreground">({item.rating}/5)</span>
+                  <span className="text-sm text-muted-foreground">
+                    ({item.rating}/5)
+                  </span>
                 </div>
               )}
               {item.release_year && (
@@ -352,7 +423,10 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
 
             {/* Genre */}
             {item.genre && (
-              <Badge variant="outline" className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300">
+              <Badge
+                variant="outline"
+                className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300"
+              >
                 {item.genre}
               </Badge>
             )}
@@ -367,7 +441,9 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
             {/* Notes */}
             {item.notes && (
               <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
-                <p className="text-sm text-foreground font-medium mb-1">Personal Notes:</p>
+                <p className="text-sm text-foreground font-medium mb-1">
+                  Personal Notes:
+                </p>
                 <p className="text-sm text-muted-foreground line-clamp-2">
                   {item.notes}
                 </p>
@@ -376,13 +452,19 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
 
             {/* Quick Status Changer */}
             <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-              <Select value={item.status} onValueChange={handleStatusChange} disabled={loading}>
+              <Select
+                value={item.status}
+                onValueChange={handleStatusChange}
+                disabled={loading}
+              >
                 <SelectTrigger className="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-primary/40">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectItem value="want_to_read">📚 Want to Read</SelectItem>
-                  <SelectItem value="currently_reading">📖 Currently Reading</SelectItem>
+                  <SelectItem value="currently_reading">
+                    📖 Currently Reading
+                  </SelectItem>
                   <SelectItem value="completed">✅ Completed</SelectItem>
                 </SelectContent>
               </Select>
@@ -393,21 +475,35 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
           <div className="space-y-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Status</label>
-              <Select value={editData.status} onValueChange={(value) => setEditData({...editData, status: value})}>
+              <Select
+                value={editData.status}
+                onValueChange={(value) =>
+                  setEditData({ ...editData, status: value })
+                }
+              >
                 <SelectTrigger className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectItem value="want_to_read">📚 Want to Read</SelectItem>
-                  <SelectItem value="currently_reading">📖 Currently Reading</SelectItem>
+                  <SelectItem value="currently_reading">
+                    📖 Currently Reading
+                  </SelectItem>
                   <SelectItem value="completed">✅ Completed</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Rating (1-5)</label>
-              <Select value={editData.rating.toString()} onValueChange={(value) => setEditData({...editData, rating: parseInt(value) || ''})}>
+              <label className="text-sm font-medium mb-2 block">
+                Rating (1-5)
+              </label>
+              <Select
+                value={editData.rating.toString()}
+                onValueChange={(value) =>
+                  setEditData({ ...editData, rating: parseInt(value) || "" })
+                }
+              >
                 <SelectTrigger className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                   <SelectValue placeholder="Select rating..." />
                 </SelectTrigger>
@@ -423,10 +519,14 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Personal Notes</label>
+              <label className="text-sm font-medium mb-2 block">
+                Personal Notes
+              </label>
               <textarea
                 value={editData.notes}
-                onChange={(e) => setEditData({...editData, notes: e.target.value})}
+                onChange={(e) =>
+                  setEditData({ ...editData, notes: e.target.value })
+                }
                 className="w-full p-3 text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary resize-none"
                 rows={3}
                 placeholder="Add your thoughts about this book..."
@@ -434,16 +534,16 @@ const ItemCard = ({ item, onUpdate, onDelete }) => {
             </div>
 
             <div className="flex gap-2">
-              <Button 
-                onClick={handleEdit} 
+              <Button
+                onClick={handleEdit}
                 disabled={loading}
                 className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <Save className="w-4 h-4 mr-2" />
                 Save Changes
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setIsEditing(false)}
                 className="border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
               >

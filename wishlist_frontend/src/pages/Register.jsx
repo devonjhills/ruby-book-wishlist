@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -24,10 +24,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (formData.password !== formData.password_confirmation) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
@@ -35,9 +35,9 @@ const Register = () => {
 
     try {
       await register(formData);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed');
+      setError(err.response?.data?.error || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -51,23 +51,22 @@ const Register = () => {
             <h1 className="text-3xl font-bold text-foreground mb-2">
               Create Account
             </h1>
-            <p className="text-muted-foreground">
-              Join our wishlist community
-            </p>
+            <p className="text-muted-foreground">Join our wishlist community</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4">
-                <p className="text-destructive text-sm">
-                  {error}
-                </p>
+                <p className="text-destructive text-sm">{error}</p>
               </div>
             )}
 
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-muted-foreground mb-2"
+                >
                   Full Name
                 </label>
                 <input
@@ -83,7 +82,10 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-muted-foreground mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -99,7 +101,10 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-muted-foreground mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -115,7 +120,10 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="password_confirmation" className="block text-sm font-medium text-muted-foreground mb-2">
+                <label
+                  htmlFor="password_confirmation"
+                  className="block text-sm font-medium text-muted-foreground mb-2"
+                >
                   Confirm Password
                 </label>
                 <input
@@ -136,13 +144,13 @@ const Register = () => {
               disabled={loading}
               className="btn-primary w-full"
             >
-              {loading ? 'Creating account...' : 'Create Account'}
+              {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
           <div className="mt-8 pt-6 border-t border-border">
             <p className="text-muted-foreground text-center text-sm">
-              Already have an account?{' '}
+              Already have an account?{" "}
               <Link
                 to="/login"
                 className="text-primary hover:text-primary/80 font-medium transition-colors"

@@ -27,3 +27,7 @@
 2:55:00 PM [vite] (client) hmr update /src/pages/Dashboard.jsx, /src/index.css
 2:58:51 PM [vite] (client) hmr update /src/App.jsx, /src/index.css
 2:58:55 PM [vite] (client) hmr update /src/App.jsx, /src/index.css
+3:03:49 PM [vite] (client) page reload src/components/ErrorBoundary.jsx
+3:03:53 PM [vite] (client) page reload src/components/ProcessDebugPanel.jsx
+3:03:56 PM [vite] (client) hmr update /src/components/SqlVisualizationPanel.jsx, /src/index.css
+3:04:00 PM [vite] (client) hmr update /src/components/MiddlewareVisualization.jsx, /src/index.css

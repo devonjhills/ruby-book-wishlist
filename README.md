@@ -12,9 +12,11 @@ A full-stack web application for managing your personal book collection. Built w
 ## Quick Start
 
 ### Prerequisites
+
 - Ruby 3.4+, Node.js 18+, PostgreSQL 14+
 
 ### Easy Start (Recommended)
+
 ```bash
 # macOS/Linux
 ./start.sh
@@ -24,6 +26,7 @@ start.bat
 ```
 
 ### Manual Setup
+
 ```bash
 # Backend
 cd wishlist_backend
@@ -38,6 +41,7 @@ npm run dev
 ```
 
 ### Demo Account
+
 - **Email**: demo@example.com
 - **Password**: password123
 
@@ -64,9 +68,11 @@ ruby-app/
 - **Educational**: Real-time Rails processing visualization
 
 ## Book Statuses
+
 - `want_to_read` → `currently_reading` → `completed`
 
 ## API Endpoints
+
 - **Auth**: `/api/auth/{register,login,me}`
 - **Books**: `/api/items` (full CRUD)
 - **Search**: `/api/search/books?q=query`
@@ -74,6 +80,7 @@ ruby-app/
 ## Educational Feature: Rails Debug Panel
 
 The app includes a unique visualization showing:
+
 - Rails routing and controller actions
 - Active Record operations
 - Database queries

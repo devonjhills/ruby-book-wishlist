@@ -1,19 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { itemsAPI } from '../services/api';
-import ItemCard from '../components/ItemCard';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { BookOpen, Filter, Plus, Library, Scroll } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { itemsAPI } from "../services/api";
+import ItemCard from "../components/ItemCard";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
+import { BookOpen, Filter, Plus, Library, Scroll } from "lucide-react";
 
 const Items = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    type: '',
-    status: '',
-    sort: 'updated_at',
+    type: "",
+    status: "",
+    sort: "updated_at",
   });
 
   useEffect(() => {
@@ -24,16 +35,17 @@ const Items = () => {
     try {
       const params = {};
       if (filters.type) params.type = filters.type;
-      if (filters.status && filters.status !== 'all') params.status = filters.status;
+      if (filters.status && filters.status !== "all")
+        params.status = filters.status;
       if (filters.sort) params.sort = filters.sort;
 
       const response = await itemsAPI.getItems(params);
-      
+
       // Handle both old and new API response formats
       const itemsData = response.data?.items || response.data || [];
       setItems(Array.isArray(itemsData) ? itemsData : []);
     } catch (error) {
-      console.error('Failed to fetch items:', error);
+      console.error("Failed to fetch items:", error);
       setItems([]); // Set empty array on error
     } finally {
       setLoading(false);
@@ -41,17 +53,17 @@ const Items = () => {
   };
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleItemUpdate = (updatedItem) => {
-    setItems(prev => prev.map(item => 
-      item.id === updatedItem.id ? updatedItem : item
-    ));
+    setItems((prev) =>
+      prev.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
+    );
   };
 
   const handleItemDelete = (deletedItemId) => {
-    setItems(prev => prev.filter(item => item.id !== deletedItemId));
+    setItems((prev) => prev.filter((item) => item.id !== deletedItemId));
   };
 
   if (loading) {
@@ -74,7 +86,10 @@ const Items = () => {
             Manage your personal book collection and reading progress
           </p>
         </div>
-        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground candlelight-glow book-hover">
+        <Button
+          asChild
+          className="bg-primary hover:bg-primary/90 text-primary-foreground book-hover"
+        >
           <Link to="/add-item" className="flex items-center gap-2">
             <Plus className="w-4 h-4" />
             Add Book
@@ -83,7 +98,7 @@ const Items = () => {
       </div>
 
       {/* Filters */}
-      <Card className="mb-8 gothic-gradient parchment-effect deep-library-shadow">
+      <Card className="mb-8 gothic-gradient deep-library-shadow">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2 text-foreground">
             <Filter className="w-5 h-5 text-primary " />
@@ -99,14 +114,19 @@ const Items = () => {
               <label className="text-sm font-medium text-foreground">
                 Reading Status
               </label>
-              <Select value={filters.status} onValueChange={(value) => handleFilterChange('status', value)}>
-                <SelectTrigger className="border-border hover:border-primary/50 focus:border-primary aged-paper">
+              <Select
+                value={filters.status}
+                onValueChange={(value) => handleFilterChange("status", value)}
+              >
+                <SelectTrigger className="border-border hover:border-primary/50 focus:border-primary">
                   <SelectValue placeholder="All Reading Statuses" />
                 </SelectTrigger>
-                <SelectContent className="gothic-gradient border-border">
+                <SelectContent className="border-border">
                   <SelectItem value="all">All Books</SelectItem>
                   <SelectItem value="want_to_read">📚 Want to Read</SelectItem>
-                  <SelectItem value="currently_reading">📖 Currently Reading</SelectItem>
+                  <SelectItem value="currently_reading">
+                    📖 Currently Reading
+                  </SelectItem>
                   <SelectItem value="completed">✅ Completed</SelectItem>
                 </SelectContent>
               </Select>
@@ -116,12 +136,17 @@ const Items = () => {
               <label className="text-sm font-medium text-foreground">
                 Sort Order
               </label>
-              <Select value={filters.sort} onValueChange={(value) => handleFilterChange('sort', value)}>
-                <SelectTrigger className="border-border hover:border-primary/50 focus:border-primary aged-paper">
+              <Select
+                value={filters.sort}
+                onValueChange={(value) => handleFilterChange("sort", value)}
+              >
+                <SelectTrigger className="border-border hover:border-primary/50 focus:border-primary">
                   <SelectValue placeholder="Sort by..." />
                 </SelectTrigger>
-                <SelectContent className="gothic-gradient border-border">
-                  <SelectItem value="updated_at">⏰ Recently Updated</SelectItem>
+                <SelectContent className="border-border">
+                  <SelectItem value="updated_at">
+                    ⏰ Recently Updated
+                  </SelectItem>
                   <SelectItem value="created_at">🆕 Recently Added</SelectItem>
                   <SelectItem value="title">🔤 Title (A-Z)</SelectItem>
                   <SelectItem value="rating">⭐ Rating</SelectItem>
@@ -134,18 +159,24 @@ const Items = () => {
 
       {/* Items Grid */}
       {items.length === 0 ? (
-        <Card className="text-center py-16 gothic-gradient parchment-effect deep-library-shadow">
+        <Card className="text-center py-16 gothic-gradient deep-library-shadow">
           <CardContent>
             <div className="mb-8">
               <div className="w-24 h-24 bg-primary/20 rounded-full mx-auto flex items-center justify-center text-4xl border-2 border-primary/30 candlelight-glow">
                 📚
               </div>
             </div>
-            <h3 className="text-xl font-semibold mb-4 text-foreground warm-glow">Your Library Awaits</h3>
+            <h3 className="text-xl font-semibold mb-4 text-foreground warm-glow">
+              Your Library Awaits
+            </h3>
             <p className="text-muted-foreground mb-8 text-lg max-w-md mx-auto italic">
-              No books found with the current filters. Start building your personal collection by adding your first book.
+              No books found with the current filters. Start building your
+              personal collection by adding your first book.
             </p>
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground candlelight-glow book-hover">
+            <Button
+              asChild
+              className="bg-primary hover:bg-primary/90 text-primary-foreground book-hover"
+            >
               <Link to="/add-item" className="flex items-center gap-2">
                 <Plus className="w-4 h-4" />
                 Add Your First Book
@@ -165,7 +196,6 @@ const Items = () => {
           ))}
         </div>
       )}
-
     </div>
   );
 };
